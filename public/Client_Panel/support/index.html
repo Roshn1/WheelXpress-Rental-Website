@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Customer Support</title>
+    <link rel="stylesheet" href="/Client_Panel/support/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/9.9.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.9.2/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <img src="/photos/logo.png" alt="WheelXpress Logo">
+            <span class="navbar-brand">WheelXpress</span>
+        </div>
+        
+        <!-- Toggle Button for Mobile -->
+        <div class="navbar-toggle" id="navbarToggle">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    
+        <!-- Navbar Menu -->
+         
+        <div class="navbar-menu" id="navbarMenu">
+            <a href="/dashboard" class="navbar-item">
+                <i class="fa-solid fa-table-columns"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href='/dashboard/availability' class="navbar-item">
+                <i class="fas fa-car-side"></i>
+                <span>Availability</span>
+            </a>
+            <a href="/dashboard/bookings" class="navbar-item">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span>Booking</span>
+            </a>
+            <a href="/dashboard/map" class="navbar-item">
+                <i class="fa-solid fa-map"></i>
+                <span>Map</span>
+            </a>
+            <a href="/dashboard/support" class="navbar-item">
+                <i class="fas fa-info-circle"></i>
+                <span>Support</span>
+            </a>
+            <a href="/dashboard/profile" class="navbar-item">
+                <i class="fa-regular fa-id-badge"></i>
+                <span>Profile</span>
+            </a>
+            
+            <a href="/login" class="navbar-item">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- <h2>Customer Support</h2>
+
+    <div class="chat-container">
+        <div class="chat-header">Live Chat Support</div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Type a message...">
+            <button id="sendButton">Send</button>
+        </div>
+    </div> -->
+
+    
+
+    <div class="faq-container">
+        <div class="faq-header">
+            <h1>Frequently Asked Questions</h1>
+            <div class="search-box">
+                <input  type="text" placeholder="Search" >
+            </div>
+            <!-- <i class="fas fa-search"></i> -->
+        </div>
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>How can I rent a two-wheeler online?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>You can rent a two-wheeler by visiting our website, selecting a vehicle, and completing the booking process.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Do I need to pay a security deposit to rent a vehicle?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, a security deposit is required based on the vehicle type.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>What is the condition of the vehicles?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>We ensure that our vehicles are well-maintained and in perfect condition.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Is home delivery possible for the vehicle?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, home delivery is available for certain locations.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>What documents are required for renting a scooter/bike ?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>We have a digital KYC process that takes less than 60 seconds to complete.Just upload your Driving License, Aadhar, and Local Address Proof and you are good to go!</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>How do I get booking confirmation? How will I know that my request has been accpeted?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Once the payment is done successfully, you’ll receive the booking confirmation and details to your registered mobile number. You can also check the same in your account under booking details section.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>How can I cancel my booking and what are the cancellation charges?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>The cancellations request received before 24hrs will be cancelled without any deductions. For more details on the cancellations please read our cancellation policy.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>What if I dont get a vehicle after booking ?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Since this is a limited facility and is on First Come First Serve basis, we thus cannot ensure the vehicle to everyone with utmost certainty. We however will try to satisfy as much as request as we can. If for any reasons the vehicle is not available, we will inform you the same. In this case no deductions will be carried out. Moreover, you will be informed at the latest when we have it available for you.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Can I extend my current booking?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>If you wish to continue your facility you can contact us post which we will extend the facility tenure for you. This is however subjected to any other pending request received to us for availing the service. The decision solely lies with Team Freedo in this regard.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Is there any distance limit on the vehicles ? What if I cross the distance limit ?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, all the vehicles come with distance (km) capping with them which are as per the package selected by you. After exhaustion of the distance limit the extra Km over the limit specified will be deducted at ₹2/km.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Do you provide any assistance if the vehicle breaks down ?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Inform us at the earliest and we will assist you further. Any deductions of the repair will be on you against genuine spare parts. However, any wear and tear damages from natural causes will be levied.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>What if I get caught violating traffic rules ?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Traffic rules are not only meant for your safety but for others in road too. Thus as mentioned we encourage you to ride responsibly but in case such incident happens you bear the full responsibility to pay any penalty to the concerned authorities.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Is there any penalty on late return?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p> We encourage you to always extend your facility in advance by informing us. Post which we will share a confirmation mail to you. However, if you are late minor deductions will be carried out proportional to the package chosen by you.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>My vehicle is stolen during the period when I availed it ?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>In case of such mishaps we request you to inform us at the earliest. Post which it is advised to lodge an FIR with the nearest police station. You shall need to be available in all investigations as required by law. So we recommend you take care of the vehicle till it's yours.</p>
+                </div>
+    
+        </div>
+        <!-- <div class="show-more-btn">
+            <button>Show More</button>
+        </div> -->
+    </div>
+    </div>
+
+
+      <!-- Scroll-to-top arrow -->
+<div id="scrollToTop" class="scroll-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+  
+      
+  
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-container">
+        <div class="footer-logo">
+            <h3>WheelXpress</h3>
+        </div>
+        <div class="footer-links ">
+            <ul>
+                <li><a href="#" >About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <ul>
+                <li><a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#" class="social-icon"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 WheelXpress. All rights reserved.</p>
+    </div>
+  </footer>
+  
+    
+
+    <script src="/Client_Panel/support/script.js"></script>
+</body>
+</html>

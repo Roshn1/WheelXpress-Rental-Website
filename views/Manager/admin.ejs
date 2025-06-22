@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Panel Navbar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <div class="navbar-container">
+        <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav class="sidebar" id="sidebar">
+            <div class="logo">
+                <i class="fas fa-user-cog"></i>
+                <span>Manager Panel</span>
+
+            </div>
+            <ul class="nav-links">
+                <li><a href="#dash"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="#booking"><i class="fa-solid fa-clipboard"></i> Bookings</a></li>
+                <li class="submenu">
+                    <a href="#manageBike"><i class="fas fa-motorcycle"></i> Manage Vehicles</a> <br>
+                </li>
+               
+                <li><a href="#generateReport"><i class="fa-solid fa-gears"></i> Report</a></li>
+                <li >
+                    <a href="#feed"><i class="fas fa-chart-bar"></i> Feedbacks</a></li>
+                </li>
+                <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+
+
+    <div class="main-content" id="dash">
+        <h1 class="dashboard-title">Admin Dashboard</h1>
+        <div class="dashboard-cards">
+            <div class="card total-bikes">
+                <div class="card-icon">
+                    <i class="fas fa-motorcycle"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Total Bikes</h3>
+                    <p>140</p>
+                </div>
+            </div>
+            <div class="card total-rentals">
+                <div class="card-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Total Rentals</h3>
+                    <p>
+                        <%= bookings.length %>
+                    </p>
+                </div>
+            </div>
+            <div class="card available-bikes">
+                <div class="card-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Available Bikes</h3>
+                    <p>40</p>
+                </div>
+            </div>
+            <div class="card damaged-bikes">
+                <div class="card-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Damaged Bikes</h3>
+                    <p>10</p>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="dashboard-container">
+
+            <div class="dashboard-graphs">
+                <div class="graph chart-rentals">
+                    <canvas id="rentalsChart"></canvas>
+                </div>
+                <div class="graph chart-revenue">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+
+            <div class="circular-data-cards">
+
+                <div class="data-card">
+                    <div class="icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="card-info">
+                        <p>Total Earned</p>
+                        <h3>₹<%= totalAmount %>
+                        </h3>
+                        <p>Last 24 Hours</p>
+                        <div class="circular-loader" data-percentage="80"></div>
+                    </div>
+                </div>
+
+
+                <div class="data-card">
+                    <div class="icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="card-info">
+                        <p>Vehicles Rented</p>
+                        <h3>45 Vehicles</h3>
+                        <p>Rented Today</p>
+                        <div class="circular-loader" data-percentage="90"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="booking">
+            <h1>Admin - Booking Data</h1>
+
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Vehicle Type</th>
+                        <th>Vehicle Model</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Booking Date</th>
+                        <th>Damaged</th>
+                        <th>Fine</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (bookings.length> 0) { %>
+                        <% bookings.forEach((booking, index)=> { %>
+                            <tr>
+                                <td>
+                                    <%= index + 1 %>
+                                </td>
+                                <td>
+                                    <%= booking.name %>
+                                </td>
+                                <td>
+                                    <%= booking.phoneNumber %>
+                                </td>
+                                <td>
+                                    <%= booking.vehicleDetails.type %>
+                                </td>
+                                <td>
+                                    <%= booking.vehicleDetails.model %>
+                                </td>
+                                <td>₹<%= booking.amount / 100 %>
+                                </td>
+                                <td>
+                                    <%= booking.status %>
+                                </td>
+                                <td>
+                                    <%= booking.bookingDate.toLocaleString() %>
+                                </td>
+
+
+                                <td>
+                                    <form action="/admin/bookings" method="post">
+                                        <select name="damaged<%= booking._id %>">
+                                            <option value="true" <%=booking.damaged ? 'selected' : '' %>>Yes</option>
+                                            <option value="false" <%=!booking.damaged ? 'selected' : '' %>>No</option>
+                                        </select>
+                                </td>
+                                <td>
+                                    <input type="number" name="fine<%= booking._id %>" value="<%= booking.totalFine %>"
+                                        min="0" step="0.01" />
+                                </td>
+                                <td>
+                                    <button type="submit">Update</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% }); %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="11">No bookings available.</td>
+                                    </tr>
+                                    <% } %>
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+
+        <div id="manageBike" class="tab-content">
+            <h2>Manage Vehicles</h2>
+            <form id="addBikeForm" action="/add-vehicle" method="POST">
+                <label for="vehicleType">Vehicle Type:</label>
+                <select id="vehicleType" name="vehicleType">
+                    <option value="Bike">Bike</option>
+                    <option value="Scooty">Scooty</option>
+                    <option value="Car">Car</option>
+                </select>
+
+                <label for="bikeName">Name:</label>
+                <input type="text" id="bikeName" name="name" required>
+
+                <label for="bikeImage">Image URL:</label>
+                <input type="text" id="bikeImage" name="imagePath">
+
+                <label for="bikePrice">Price:</label>
+                <input type="number" id="bikePrice" name="price" required>
+
+                <label for="seater">Seater:</label>
+                <select id="seater" name="seater">
+                    <option value="2">2 Seater</option>
+                    <option value="5">5 Seater</option>
+                </select>
+
+                <label for="transmission">Transmission:</label>
+                <select id="transmission" name="transmission">
+                    <option value="Manual">Manual</option>
+                    <option value="Automatic">Automatic</option>
+                </select>
+
+                <label for="fuel">Fuel Type:</label>
+                <select id="fuel" name="fuel">
+                    <option value="Petrol">Petrol</option>
+                    <option value="Diesel">Diesel</option>
+                </select>
+
+                <label for="stock">Stock:</label>
+                <input type="number" id="stock" name="stock" required>
+
+                <button type="submit">Add Vehicle</button>
+            </form>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Vehicle Type</th>
+                        <th>Name</th>
+                        <th>Image</th>
+                        <th>Price</th>
+                        <th>Seater</th>
+                        <th>Transmission</th>
+                        <th>Fuel</th>
+                        <th>Stock</th>
+                    </tr>
+                </thead>
+                <tbody id="vehiclesTableBody">
+                    <% vehicles.forEach(vehicle=> { %>
+                        <tr>
+                            <td>
+                                <%= vehicle.vehicleType %>
+                            </td>
+                            <td>
+                                <%= vehicle.name %>
+                            </td>
+                            <td><img src="<%= vehicle.imagePath %>" alt="<%= vehicle.name %>" width="100"></td>
+                            <td>
+                                <%= vehicle.price %>
+                            </td>
+                            <td>
+                                <%= vehicle.seater %>
+                            </td>
+                            <td>
+                                <%= vehicle.transmission %>
+                            </td>
+                            <td>
+                                <%= vehicle.fuel %>
+                            </td>
+                            <td>
+                                <%= vehicle.stock %>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+
+            </table>
+        </div>
+
+
+        <div id="generateReport">
+            <h2>Generate Report</h2>
+            <form id="reportForm">
+                <label for="reportType">Select Report Type:</label>
+                <select id="reportType">
+                    <option value="rentals">Rental Report</option>
+                    <option value="revenue">Revenue Report</option>
+                    <option value="vehicleUsage">Vehicle Usage Report</option>
+                </select>
+
+                <label for="dateRange">Select Date Range:</label>
+                <input type="date" id="startDate"> to
+                <input type="date" id="endDate">
+
+                <button type="button" onclick="generateReport()">Generate Report</button>
+            </form>
+
+            <div id="reportOutput" style="display: none;">
+                <h3>Report Preview</h3>
+                <p>Your report will appear here.</p>
+            </div>
+        </div>
+
+
+        <div id="viewAnalytics">
+            <h2>View Analytics</h2>
+            <div class="analyticsGrid">
+                <div class="analyticsCard">
+                    <h3>Total Rentals</h3>
+                    <p>
+                        <%= bookings.length %>
+                    </p>
+                </div>
+                <div class="analyticsCard">
+                    <h3>Revenue</h3>
+                    <p>₹<%= totalAmount %>
+                    </p>
+                </div>
+                <div class="analyticsCard">
+                    <h3>Total Feedbacks</h3>
+                    <p>
+                        <%= totalFeed %>
+                    </p>
+                </div>
+                <div class="analyticsCard">
+                    <h3>Fuel Preference</h3>
+                    <p>Petrol</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="chart-data" data-rental-count="<%= bookings.length %> " data-vehicle-count="<%= vehicleCount %>"
+            data-total-revenue="<%= totalAmount  %>" data-feedback-count=" <%= totalFeed %>">
+        </div>
+
+        <script>
+            const chartDataElement = document.getElementById('chart-data');
+
+            const rentalCount = parseInt(chartDataElement.dataset.rentalCount, 10);
+            const vehicleCount = parseInt(chartDataElement.dataset.vehicleCount, 10);
+            const totalRevenue = parseInt(chartDataElement.dataset.totalRevenue, 10);
+            const feedbackCount = parseInt(chartDataElement.dataset.feedbackCount, 10);
+
+            const rentalsChartCtx = document.getElementById('rentalsChart').getContext('2d');
+            const rentalsChart = new Chart(rentalsChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['TVS Jupiter', 'TVS Apache RTR 160', 'Royal Enfield Bullet', 'Bajaj Pulsar', 'Bajaj Avenger', 'Honda Activa'], 
+                    datasets: [{
+                        label: 'Times Rented',
+                        data: [rentalCount * 0.5, rentalCount * 1.2, rentalCount * 0.8, rentalCount * 1.4, rentalCount * 1.1, rentalCount * 1.6], 
+                        backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)', 'rgba(255, 99, 132, 0.2)'],
+                        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)', 'rgba(255, 99, 132, 1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            const revenueChartCtx = document.getElementById('revenueChart').getContext('2d');
+            const revenueChart = new Chart(revenueChartCtx, {
+                type: 'line',
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                    datasets: [{
+                        label: 'Monthly Revenue',
+                        data: [totalRevenue * 0, totalRevenue * 0, totalRevenue * 0, totalRevenue * 0, totalRevenue * 0, totalRevenue * 0, totalRevenue * 0, totalRevenue * 0, totalRevenue * 0, totalRevenue * 0, totalRevenue, totalRevenue * 1.2],
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+
+        <h1 id="feed" style="text-align: center;">All Feedbacks</h1>
+        <div class="table-wrapper2">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Feedback</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% feedbacks.forEach(feedback=> { %>
+                        <tr>
+                            <td>
+                                <%= feedback.name %>
+                            </td>
+                            <td>
+                                <%= feedback.phone %>
+                            </td>
+                            <td>
+                                <%= feedback.email %>
+                            </td>
+                            <td>
+                                <%= feedback.feedback %>
+                            </td>
+                            <td>
+                                <form action="/remove-feedback" method="POST">
+                                    <input type="hidden" name="feedbackId" value="<%= feedback._id %>">
+                                    <button type="submit">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div id="scrollToTop" class="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="/js/admin.js"></script>
+</body>
+
+</html>

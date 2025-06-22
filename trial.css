@@ -1,0 +1,186 @@
+/* General Styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: #f0f4f8;
+  color: #333;
+}
+
+/* Navbar Styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: linear-gradient(135deg, #FF7E5F, #feb47b);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-logo img {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.navbar-logo .navbar-brand {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-item {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar-item:hover {
+  color: #333;
+}
+
+.navbar-item.active {
+  border-bottom: 3px solid white;
+}
+
+/* Profile Section Styling */
+.profile-section {
+  display: flex;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.profile-card {
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #f0f4f8;
+  padding-bottom: 20px;
+}
+
+.profile-avatar img {
+  border-radius: 50%;
+  height: 80px;
+  width: 80px;
+  margin-right: 20px;
+}
+
+.profile-info h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.profile-info .user-role {
+  font-size: 16px;
+  color: #999;
+}
+
+.profile-details,
+.profile-rental-history,
+.profile-settings,
+.profile-preferences {
+  margin-bottom: 30px;
+}
+
+.profile-details h3,
+.profile-rental-history h3,
+.profile-settings h3,
+.profile-preferences h3 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.profile-details ul,
+.profile-rental-history ul,
+.profile-preferences ul {
+  list-style: none;
+  padding: 0;
+}
+
+.profile-details ul li,
+.profile-rental-history ul li,
+.profile-preferences ul li {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.profile-settings .settings-btn {
+  background-color: #FF7E5F;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.profile-settings .settings-btn:hover {
+  background-color: #feb47b;
+  transform: translateY(-5px);
+}
+
+/* Footer Styling */
+.footer {
+  background-color: #ffffff;
+  padding: 40px 0;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.footer-logo h3 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #FF7E5F;
+}
+
+.footer-links ul {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-links ul li {
+  list-style: none;
+}
+
+.footer-links ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+  color: #FF7E5F;
+}

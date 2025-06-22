@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WheelXpress</title>
+    <link rel="stylesheet" href="../Client_Panel/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <img src="../photos/logo.png" alt="WheelXpress Logo">
+            <span class="navbar-brand">WheelXpress</span>
+        </div>
+        
+        <!-- Toggle Button for Mobile -->
+        <div class="navbar-toggle" id="navbarToggle">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    
+        <!-- Navbar Menu -->
+         
+        <div class="navbar-menu" id="navbarMenu">
+            <a href="/dashboard" class="navbar-item">
+                <i class="fa-solid fa-table-columns"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href='/dashboard/availability' class="navbar-item">
+                <i class="fas fa-car-side"></i>
+                <span>Availability</span>
+            </a>
+         
+            <a href="/dashboard/map" class="navbar-item">
+                <i class="fa-solid fa-map"></i>
+                <span>Map</span>
+            </a>
+            <a href="/dashboard/support" class="navbar-item">
+                <i class="fas fa-info-circle"></i>
+                <span>Support</span>
+            </a>
+            <a href="/dashboard/profile" class="navbar-item">
+                <i class="fa-regular fa-id-badge"></i>
+                <span>Profile</span>
+            </a>
+            
+            <a href="/login" class="navbar-item">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span>Login</span>
+            </a>
+            
+           
+           
+            
+        </div>
+    </nav>
+    
+
+    <header class="header-section">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="header-title">Two Wheelers Rentals</h1>
+                <h2 class="header-subtitle">Freedom To Move</h2>
+                <p class="header-description">Presenting the safe, reliable and affordable mobility solution</p>
+                <div class="header-buttons">
+                    <button class="city-select-btn" id="goaBtn">Available in <i class="fa-solid fa-location-dot"></i></button>
+                    <form action="/dashboard">
+                        <button class="search-btn" onclick="openPopup()">Book Vehicle <i class="fa-solid fa-motorcycle"></i></button>
+                    </form>
+                
+                </div>
+                <div class="head-img">
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+   
+    
+
+    <!-- Popup Modal -->
+  <div id="cityPopup" class="popup-overlay">
+    <div class="popup-content">
+      <span class="close-btn">&times;</span>
+      <h2>City</h2>
+      <div class="city-grid">
+       
+        <div class="city-card">
+          <img src="../Client_Panel/images/agra.jpg" alt="City Image">
+          <p>Agra</p>
+        </div>
+        <div class="city-card">
+            <img src="../Client_Panel/images/ahemdabad.jpg" alt="City Image">
+            <p>Ahmedabad</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Amritsar.jpg" alt="City Image">
+            <p>Amritsar</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Bangalore.jpg" alt="City Image">
+            <p>Bangalore</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Coorg.jpg" alt="City Image">
+            <p>Coorg</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Dehradun.jpg" alt="City Image">
+            <p>Dehradun</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Delhi.jpg" alt="City Image">
+            <p>Delhi</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Dharamshala.jpg" alt="City Image">
+            <p>Dharamshala</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Goa.jpg" alt="City Image">
+            <p>Goa</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Hyderabad.jpg" alt="City Image">
+            <p>Hyderabad</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Jaipur.jpg" alt="City Image">
+            <p>Jaipur</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Jodhpur.jpg" alt="City Image">
+            <p>Jodhpur</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Kolkata.jpg" alt="City Image">
+            <p>Kolkata</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Leh.jpg" alt="City Image">
+            <p>Leh</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Manali.jpg" alt="City Image">
+            <p>Manali</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Mathura.jpg" alt="City Image">
+            <p>Mathura</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Mumbai.jpg" alt="City Image">
+            <p>Mumbai</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Nainital.jpg" alt="City Image">
+            <p>Nainital</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Rishikesh.jpg" alt="City Image">
+            <p>Rishikesh</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Shimla.jpg" alt="City Image">
+            <p>Shimla</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Udaipur.jpg" alt="City Image">
+            <p>Udaipur</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Vadodara.jpg" alt="City Image">
+            <p>Vadodara</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Varanasi.jpg" alt="City Image">
+            <p>Varanasi</p>
+          </div>
+          <div class="city-card">
+            <img src="../Client_Panel/images/Vizag.jpg" alt="City Image">
+            <p>Vizag</p>
+          </div>
+          
+        
+
+
+      </div>
+    </div>
+  </div>
+    
+<!-- ----------------------------------------------------------- -->
+
+    <section class="travel-grid-right">
+        <div class="grid-right-container">
+            <div class="grid-right-item img1">
+                <img src="../Client_Panel/images/1.jpeg" alt="Bike Ride 1">
+            </div>
+            <div class="grid-right-item img2">
+                <img src="../Client_Panel/images/2.jpg" alt="Bike Ride 2">
+            </div>
+            <div class="grid-right-item img3">
+                <img src="../Client_Panel/images/3.jpeg" alt="Bike Ride 3">
+            </div>
+            <div class="grid-right-item video">
+                <video src="../Client_Panel/images/3055287-uhd_3840_2160_24fps.mp4" autoplay loop muted></video>
+            </div>
+        </div>
+        <div class="quote-right-container">
+            <p class="quote-right">"Freedom on Two Wheels - Explore the World, One Ride at a Time."</p>
+        </div>
+    </section>
+    <br>
+    <!-- ----------------------------------------------------------- -->
+
+
+
+     <!-- ----------------------------------------------------------- -->
+     <div class="features-container">
+        <div class="feature-item">
+            <i class="fas fa-motorcycle feature-icon"></i>
+            <h3>Bike Rentals</h3>
+            <p>Choose from a variety of bikes to rent for your travel adventures.</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-car feature-icon"></i>
+            <h3>Car Rentals</h3>
+            <p>Select from a range of cars for a comfortable journey.</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-map-marked-alt feature-icon"></i>
+            <h3>Navigation Support</h3>
+            <p>Get navigation support with real-time tracking and location services.</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-id-card feature-icon"></i>
+            <h3>Email Confirmation</h3>
+            <p>After booking,  receive a confirmation email with vehicle details.</p>
+        </div>
+    </div>
+    
+     <!-- ----------------------------------------------------------- -->
+     <div class="rental-container">
+        <h2>Renting Fleet</h2>
+        <div class="filters">
+            <ul>
+                <li class="filter-item active" onclick="filterCards('all')">Show All</li>
+                <li class="filter-item" onclick="filterCards('bike')">Bikes</li>
+                <li class="filter-item" onclick="filterCards('scooter')">Scooters</li>
+            </ul>
+        </div>
+    
+        <div class="rental-cards">
+            <div class="rental-card" data-category="bike">
+                <img src="../Client_Panel/images/royal enfield classic 350.jpeg" alt="Royal Enfield Classic 350">
+                <h3>Royal Enfield <span>Classic 350</span></h3>
+                <p class="price">778/- per day</p>
+                <p class="deposit">Zero Deposit Fee</p>
+                <form action="/booking">
+                  <button class="book-btn" onclick="openPopup()">Book Vehicle</button>
+              </form>
+            </div>
+            <div class="rental-card" data-category="scooter">
+                <img src="../Client_Panel/images/Honda Activa 6G.jpg" alt="Honda Activa 6G">
+                <h3>Honda <span>Activa 6G</span></h3>
+                <p class="price">333/- per day</p>
+                <p class="deposit">Zero Deposit Fee</p>
+                <form action="/booking">
+                  <button class="book-btn" onclick="openPopup()">Book Vehicle</button>
+              </form>
+            </div>
+            <div class="rental-card" data-category="scooter">
+                <img src="../Client_Panel/images/TVS Ntorq 125.jpeg" alt="TVS Ntorq 125">
+                <h3>TVS <span>Ntorq 125</span></h3>
+                <p class="price">444/- per day</p>
+                <p class="deposit">Zero Deposit Fee</p>
+                <form action="/booking">
+                  <button class="book-btn" onclick="openPopup()">Book Vehicle</button>
+              </form>
+            </div>
+        </div>
+        <button class="show-more-btn" id="shw-availability">Show More</button>
+    </div>
+    
+
+
+   
+
+
+    <div class="faq-container">
+        <h2>FAQ's</h2>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(this)">
+                <p>How can I rent a two-wheeler online?</p>
+                <i class="fas fa-plus faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+                <p>To rent a two-wheeler online, you need to browse available vehicles, select your preferred one, and proceed with the booking. Payment can be made online and a verification process will follow.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(this)">
+                <p>Do I need to pay security deposit to rent a vehicle?</p>
+                <i class="fas fa-plus faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, a refundable security deposit is required when renting a vehicle. This ensures vehicle safety and is refunded after the vehicle is returned in good condition.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(this)">
+                <p>What is the condition of the vehicles?</p>
+                <i class="fas fa-plus faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+                <p>We ensure that all vehicles are well-maintained and in excellent condition at the time of delivery. Customers can also inspect the vehicle before accepting it.</p>
+            </div>
+        </div>
+    
+        <button class="faq-show-more" onclick="openMoreFaq()">Show More</button>
+
+    
+    </div>
+
+    <!-- Scroll-to-top arrow -->
+<div id="scrollToTop" class="scroll-to-top">
+  <i class="fas fa-arrow-up"></i>
+</div>
+
+    
+
+<!-- Footer Section -->
+<footer class="footer">
+  <div class="footer-container">
+      <div class="footer-logo">
+          <h3>WheelXpress</h3>
+      </div>
+      <div class="footer-links">
+          <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="/terms">Privacy Policy</a></li>
+              <li><a href="/terms">Terms of Service</a></li>
+              
+          </ul>
+      </div>
+      <div class="footer-social">
+          <ul>
+              <li><a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="#" class="social-icon"><i class="fab fa-instagram"></i></a></li>
+              <li><a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a></li>
+          </ul>
+      </div>
+  </div>
+  <div class="footer-bottom">
+      <p>&copy; 2024 WheelXpress. All rights reserved.</p>
+  </div>
+</footer>
+
+    
+    
+    
+    
+    
+    <script src="../Client_Panel/script.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+
+</body>
+</html>

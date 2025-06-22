@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Availability - WheelXpress</title>
+    <link rel="stylesheet" href="/Client_Panel/availability/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <img src="/photos/logo.png" alt="WheelXpress Logo">
+            <span class="navbar-brand">WheelXpress</span>
+        </div>
+
+        <!-- Toggle Button for Mobile -->
+        <div class="navbar-toggle" id="navbarToggle">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <!-- Navbar Menu -->
+          
+        <div class="navbar-menu" id="navbarMenu">
+            <a href="/dashboard" class="navbar-item">
+                <i class="fa-solid fa-table-columns"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="/dashboard/availability" class="navbar-item">
+                <i class="fas fa-car-side"></i>
+                <span>Availability</span>
+            </a>
+            <a href="/dashboard/bookings" class="navbar-item">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span>Booking</span>
+            </a>
+            <a href="/dashboard/map" class="navbar-item">
+                <i class="fa-solid fa-map"></i>
+                <span>Map</span>
+            </a>
+            <a href="/dashboard/support" class="navbar-item">
+                <i class="fas fa-info-circle"></i>
+                <span>Support</span>
+            </a>
+            <a href="/dashboard/profile" class="navbar-item">
+                <i class="fa-regular fa-id-badge"></i>
+                <span>Profile</span>
+            </a>
+            
+            <a href="/login" class="navbar-item">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span>Logout</span>
+            </a>
+            
+           
+           
+            
+        </div>
+    </nav>
+
+
+    <div class="availability-container">
+        <h1 class="section-title">Available Vehicles</h1>
+
+
+
+        <!-- Filter and Sort Section -->
+        <div class="filter-sort-section">
+            <div class="filters">
+                <select id="vehicleType" class="filter-dropdown">
+                    <option value="all">All Vehicles</option>
+                    <option value="bike">Bike</option>
+                    <option value="scooty">Scooty</option>
+                    <option value="car">Car</option>
+                </select>
+                <select id="transmissionType" class="filter-dropdown">
+                    <option value="any">Any Transmission</option>
+                    <option value="manual">Manual</option>
+                    <option value="automatic">Automatic</option>
+                </select>
+                <select id="fuelType" class="filter-dropdown">
+                    <option value="any">Any Fuel Type</option>
+                    <option value="petrol">Petrol</option>
+                    <option value="diesel">Diesel</option>
+                </select>
+                <select id="cityType" class="filter-dropdown">
+                    <option value="any">Select City</option>
+                    <option value=" Agra">Agra</option>
+                    <option value=" Ahmedabad">Ahmedabad</option>
+                    <option value=" Amritsar">Amritsar</option>
+                    <option value=" Bangalore">Bangalore</option>
+                    <option value="Coorg ">Coorg</option>            
+                    <option value=" Dehradun">Dehradun</option>
+                    <option value=" Delhi">Delhi</option>
+                    <option value="Dharamshala ">Dharamshala</option>                   
+                    <option value=" Goa">Goa</option>               
+                    <option value="Hyderabad ">Hyderabad</option>
+                    <option value=" Jaipur">Jaipur</option>
+                    <option value=" Jodhpur">Jodhpur</option>                  
+                    <option value="Kolkata ">Kolkata</option>                 
+                    <option value=" Leh">Leh</option>
+                    <option value=" Manali">Manali</option>              
+                    <option value=" Mathura">Mathura</option>               
+                    <option value="Mumbai "> Mumbai</option>
+                    <option value="Nainital ">Nainital</option>
+                    <option value="Rishikesh ">Rishikesh</option>
+                    <option value=" Shimla "> Shimla</option>    
+                    <option value="  Udaipur">Udaipur</option>                   
+                    <option value="Vadodara ">Vadodara</option>
+                    <option value="Varanasi ">Varanasi</option>
+                    <option value=" Vizag">Vizag</option>       
+                </select>
+                <div class="sort-options">
+                    <select id="sortBy" class="filter-dropdown">
+                        <option value="popularity">Sort by Popularity</option>
+                        <option value="priceLowHigh">Price: Low to High</option>
+                        <option value="priceHighLow">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Availability Cards Section -->
+        <div class="availability-grid">
+            <!-- Example Vehicle Card -->
+            <div class="vehicle-card">
+                <img src="/photos/TVS Apache RTR 160 BS6.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">TVS Apache RTR 160 BS6</h2>
+                    <p class="vehicle-details">Bike | Manual | Petrol | 2 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹750 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                   
+                </div>
+            </div>
+            <!-- Add more vehicle cards as needed -->
+            <div class="vehicle-card">
+                <img src="/photos/Royal Enfield Bullet Standard 500.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Royal Enfield Bullet Standard 500</h2>
+                    <p class="vehicle-details">Bike | Manual | Petrol | 2 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹1100 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/Bajaj Pulsar 200 NS.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Bajaj Pulsar 200 NS</h2>
+                    <p class="vehicle-details">Bike | Manual | Petrol | 2 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹600 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/Bajaj Avenger Street 220.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Bajaj Avenger Street 220</h2>
+                    <p class="vehicle-details">Bike | Manual | Petrol | 2 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹1000 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/Bajaj Pulsar 220.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Bajaj Pulsar 220</h2>
+                    <p class="vehicle-details">Bike | Manual | Petrol | 2 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹1000 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/Honda Activa 5G.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Honda Activa 5G</h2>
+                    <p class="vehicle-details">Scooty | Manual | Petrol | 2 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹400 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/Suzuki Access 125.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Suzuki Access 125</h2>
+                    <p class="vehicle-details">Scooty | Manual | Petrol | 2 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹650 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/Royal Enfield Himalayan.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Royal Enfield Himalayan</h2>
+                    <p class="vehicle-details">Bike | Manual | Petrol | 2 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹1800 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/TVS Jupiter Classic.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">TVS Jupiter Classic</h2>
+                    <p class="vehicle-details">Scooty | Manual | Petrol | 2 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹599 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/Suzuki Intruder.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Suzuki Intruder</h2>
+                    <p class="vehicle-details">Bike | Manual | Petrol | 2 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹1069 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/Honda CBR 250R.jpg" alt="Vehicle Image"
+                    class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Honda CBR 250R</h2>
+                    <p class="vehicle-details">Bike | Manual | Petrol | 2 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹200 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/TVS Jupiter.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">TVS Jupiter</h2>
+                    <p class="vehicle-details">Scooty | Manual | Petrol | 2 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹399 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/Maruti ertiga.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Maruti ertiga</h2>
+                    <p class="vehicle-details">Car | Manual | Diesel | 7 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹1946 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/Tata safari.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Tata safari</h2>
+                    <p class="vehicle-details">Car | Manual | Diesel | 7 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹2345 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/Toyota innova.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Toyota innova</h2>
+                    <p class="vehicle-details">Car | Manual | Diesel | 7 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹2895 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/Hyundai i20.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Hyundai i20</h2>
+                    <p class="vehicle-details">Car | Manual | Diesel | 5 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹2,581 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/KIA Sonet.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">KIA Sonet</h2>
+                    <p class="vehicle-details">Car | Manual | Petrol | 5 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹3,289 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/Maruti Dzire.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Maruti Dzire</h2>
+                    <p class="vehicle-details">Car | Automatic | Petrol | 5 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹3,289 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/Toyota Glanza.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Toyota Glanza</h2>
+                    <p class="vehicle-details">Car | Manual | Petrol | 5 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹3289 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/Toyota Innova Crysta.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Toyota Innova Crysta</h2>
+                    <p class="vehicle-details">Car | Manual | Diesel | 7 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹4346 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/Hyundai i10 Grand.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Hyundai i10 Grand</h2>
+                    <p class="vehicle-details">Car | Manual | Diesel | 5 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹1811 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/Maruti Baleno.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Maruti Baleno</h2>
+                    <p class="vehicle-details">Car | Manual | Petrol | 5 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹3194 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/Ford Ecosport.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Ford Ecosport</h2>
+                    <p class="vehicle-details">Car | Manual | Diesel | 5 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹3387 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <img src="/photos/Mahindra Scorpio.jpg" alt="Vehicle Image" class="vehicle-image">
+                <div class="vehicle-info">
+                    <h2 class="vehicle-name">Mahindra Scorpio</h2>
+                    <p class="vehicle-details">Car | Automatic | Diesel | 7 Seater</p>
+                    <p class="vehicle-location">Available in Mumbai</p>
+                    <p class="price">₹5455 / Day</p>
+                    <p class="availability-status">Available Now</p>
+                    <form action="/booking">
+                        <button class="book-now-btn" onclick="openPopup()">Book Vehicle</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+      <!-- Scroll-to-top arrow -->
+<div id="scrollToTop" class="scroll-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+  
+      
+  
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-container">
+        <div class="footer-logo">
+            <h3>WheelXpress</h3>
+        </div>
+        <div class="footer-links">
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <ul>
+                <li><a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#" class="social-icon"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 WheelXpress. All rights reserved.</p>
+    </div>
+  </footer>
+  
+
+       
+
+    <script src="/Client_Panel/availability/script.js"></script>
+</body>
+
+</html>

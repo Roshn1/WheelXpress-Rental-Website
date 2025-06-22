@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Signup</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="forms-wrapper">
+            <div class="form-toggle">
+                <button id="loginToggle" onclick="toggleForm('login')">Login</button>
+                <button id="signupToggle" onclick="toggleForm('signup')">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form active">
+                <h2>Welcome Back!</h2>
+                <p class="form-subtext">Login to continue exploring WheelXpress</p>
+                <div class="input-group">
+                    <input type="email" placeholder="Enter Email" required>
+                    <span class="focus-effect"></span>
+                </div>
+                <div class="input-group">
+                    <input type="password" placeholder="Enter Password" required>
+                    <span class="focus-effect"></span>
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+                <p class="toggle-link">
+                    Don't have an account? <span onclick="toggleForm('signup')">Sign Up</span>
+                </p>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="signupForm" class="auth-form">
+                <h2>Join WheelXpress!</h2>
+                <p class="form-subtext">Sign up and get started with your rentals</p>
+                <div class="input-group">
+                    <input type="text" placeholder="Full Name" required>
+                    <span class="focus-effect"></span>
+                </div>
+                <div class="input-group">
+                    <input type="email" placeholder="Enter Email" required>
+                    <span class="focus-effect"></span>
+                </div>
+                <div class="input-group">
+                    <input type="password" placeholder="Create Password" required>
+                    <span class="focus-effect"></span>
+                </div>
+                <div class="input-group">
+                    <input type="password" placeholder="Confirm Password" required>
+                    <span class="focus-effect"></span>
+                </div>
+                <button type="submit" class="submit-btn">Sign Up</button>
+                <p class="toggle-link">
+                    Already have an account? <span onclick="toggleForm('login')">Login</span>
+                </p>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

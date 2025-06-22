@@ -1,0 +1,151 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)),url(/photos/booking_bg.jpg) no-repeat center center fixed; 
+  background-size: 100%;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Booking Container */
+.booking-container {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 40px 50px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+h2 {
+  font-size: 2.4em;
+  margin-bottom: 20px;
+  /* color: #8e2de2; Vibrant purple title */
+  /* color: rgba(10,101,154,255); */
+  /* color: #0a659a; */
+  background: #FF0000;
+background: linear-gradient(to left, #FF0000 0%, #000000 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+font-weight: bolder;
+  /* text-shadow: 0 0 20px rgba(142, 45, 226, 0.7), 0 0 40px rgba(72, 0, 224, 0.5); Glowing effect */
+  /* text-shadow: 2px 2px 20px yellow; */
+}
+
+/* Form Labels */
+form label {
+  display: block;
+  margin: 12px 0 5px;
+  font-weight: 600;
+  font-size: 1.1em;
+  color: #333;
+}
+
+/* Form Inputs & Selects */
+form input, form select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 18px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  background-color: #f8f8f8;
+  color: #333;
+  font-size: 1.1em;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 87, 34, 0.1); /* Light orange shadow */
+}
+
+/* Focus effect */
+form input:focus, form select:focus {
+  border-color: #ff5722; /* Bright orange on focus */
+  outline: none;
+  box-shadow: 0 0 15px rgba(255, 87, 34, 0.5);
+}
+
+/* Button styling */
+button.pay-btn {
+  background: linear-gradient(45deg, #ff5722, #ff9800); /* Orange gradient for button */
+  padding: 15px 30px;
+  width: 100%;
+  font-size: 1.2em;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Button hover effect */
+button.pay-btn:hover {
+  box-shadow: 0 10px 20px rgba(255, 87, 34, 0.5);
+  transform: translateY(-5px);
+}
+
+button.pay-btn:active {
+  transform: translateY(0);
+}
+
+/* Glowing text effect for titles */
+.glowing-text {
+  color: #8e2de2; /* Purple glow */
+  font-weight: bold;
+  text-shadow: 0 0 8px rgba(142, 45, 226, 0.7), 0 0 16px rgba(72, 0, 224, 0.6);
+}
+
+/* Special Hover Effects for Inputs */
+form input[type="number"]:hover, form input[type="tel"]:hover, form input[type="text"]:hover, form input[type="email"]:hover, form input[type="date"]:hover, form input[type="time"]:hover {
+  border-color: #8e2de2; /* Purple border on hover */
+  box-shadow: 0 0 12px rgba(142, 45, 226, 0.4);
+}
+
+/* Glowing Focus on Input Fields */
+form input[type="number"]:focus, form input[type="tel"]:focus, form input[type="text"]:focus, form input[type="email"]:focus, form input[type="date"]:focus, form input[type="time"]:focus {
+  border-color: #ff5722; /* Glowing orange border */
+  box-shadow: 0 0 15px rgba(255, 87, 34, 0.5);
+}
+
+/* Form Layout */
+form {
+  margin-top: 30px;
+}
+
+/* Dropdown styling */
+form select {
+  padding: 12px;
+  font-size: 1.1em;
+  background-color: #f8f8f8;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+/* Dropdown Hover */
+form select:hover {
+  border-color: #8e2de2;
+  box-shadow: 0 0 12px rgba(142, 45, 226, 0.5);
+}
+
+/* Animation for fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

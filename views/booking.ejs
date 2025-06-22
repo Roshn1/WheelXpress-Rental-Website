@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Page - WheelXpress</title>
+  <link rel="stylesheet" href="/css/booking.css"> 
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+
+<body>
+  <div class="booking-container">
+    <h2>Book Your Ride</h2>
+    <form id="bookingForm">
+      <label for="vehicleType">Select Vehicle Type:</label>
+      <select id="vehicleType" onchange="updateModelDropdown()" required>
+        <option value="">Choose...</option>
+        <option value="bike">Bike</option>
+        <option value="scooty">Scooty</option>
+        <option value="car">Car</option>
+      </select>
+
+      <label for="vehicleModel">Select Vehicle Model:</label>
+      <select id="vehicleModel" required>
+        <option value="">Choose...</option>
+      </select>
+
+      <label for="paymentPlan">Select Payment Amount (₹200-6000):</label>
+      <input type="number" id="paymentPlan" min="200" max="6000" step="50" required>
+
+      <label for="name">Name:</label>
+      <input type="text" id="name" required>
+
+      <label for="number">Phone Number:</label>
+      <input type="tel" id="number" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+
+      <label for="date">Select Date:</label>
+      <input type="date" id="date" required>
+
+      <label for="time">Select Time:</label>
+      <input type="time" id="time" required>
+
+      <label for="location">Select Location:</label>
+      <select id="location" required>
+        <option value="">Choose...</option>
+        <option value="Agra">Agra</option>
+        <option value="Amritsar">Amritsar</option>
+        <option value="Bangalore">Bangalore</option>
+        <option value="Coorg">Coorg</option>
+        <option value="Dehradun">Dehradun</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Dharamshala">Dharamshala</option>
+        <option value="Goa">Goa</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Jaipur">Jaipur</option>
+        <option value="Jodhpur">Jodhpur</option>
+        <option value="Kolkata">Kolkata</option>
+        <option value="Leh">Leh</option>
+        <option value="Manali">Manali</option>
+        <option value="Mathura">Mathura</option>
+        <option value="Mumbai "> Mumbai</option>
+        <option value="Nainital ">Nainital</option>
+        <option value="Rishikesh ">Rishikesh</option>
+        <option value=" Shimla "> Shimla</option>
+        <option value="  Udaipur">Udaipur</option>
+        <option value="Vadodara ">Vadodara</option>
+        <option value="Varanasi ">Varanasi</option>
+        <option value=" Vizag">Vizag</option>
+      </select>
+
+      <button type="button" class="pay-btn" onclick="initiatePayment()">Pay Now</button>
+    </form>
+  </div>
+
+  <script>
+    
+    const models = {
+      bike: ['TVS Apache RTR 160 BS6',
+        'Royal Enfield Bullet Standard 500',
+        'Bajaj Pulsar 200 NS',
+        'Bajaj Avenger Street 220',
+        'Bajaj Pulsar 220',
+        'Royal Enfield Himalayan',
+        'Suzuki Intruder',
+        'Honda CBR 250R',
+
+      ],
+      scooty: [
+        'Honda Activa 5G',
+        'Suzuki Access 125',
+        'TVS Jupiter Classic',
+        'TVS Jupiter'
+
+      ], 
+      car: [
+        'Maruti ertiga',
+        'Tata safari',
+        'Toyota innova',
+        'Hyundai i20',
+        'KIA Sonet',
+        'Maruti Dzire',
+        'Toyota Glanza',
+        'Toyota Innova Crysta',
+        'Hyundai i10 Grand',
+        'Maruti Baleno',
+        'Ford Ecosport',
+        'Mahindra Scorpio',
+
+      ]
+    };
+
+    function updateModelDropdown() {
+      const type = document.getElementById('vehicleType').value;
+      const modelDropdown = document.getElementById('vehicleModel');
+      modelDropdown.innerHTML = '<option value="">Choose...</option>';
+      if (models[type]) {
+        models[type].forEach(model => {
+          const option = document.createElement('option');
+          option.value = model;
+          option.textContent = model;
+          modelDropdown.appendChild(option);
+        });
+      }
+    }
+
+    function initiatePayment() {
+      const paymentPlan = document.getElementById('paymentPlan').value;
+      const amount = paymentPlan;
+
+      fetch('/booking/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount })
+      })
+        .then(res => res.json())
+        .then(data => {
+          const options = {
+            key: 'rzp_test_2vHKkos75qtCIP',
+            amount: data.amount,
+            currency: 'INR',
+            name: 'WheelXpress Booking',
+            description: 'Vehicle Rental Payment',
+            order_id: data.id,
+            handler: function (response) {
+              alert('Your vehicle has been booked. Check your inbox for more information.');
+
+              const paymentDetails = {
+                orderId: response.razorpay_order_id,
+                paymentId: response.razorpay_payment_id,
+                signature: response.razorpay_signature,
+                amount: data.amount,
+                vehicleType: document.getElementById('vehicleType').value,
+                vehicleModel: document.getElementById('vehicleModel').value,
+                name: document.getElementById('name').value,
+                phoneNumber: document.getElementById('number').value,
+                email: document.getElementById('email').value
+              };
+
+              fetch('/booking/save-payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(paymentDetails)
+              }).then(res => res.json()).then(result => {
+                console.log('Booking saved:', result);
+              }).catch(err => {
+                console.error('Error saving booking:', err);
+              });
+            },
+            prefill: {
+              name: document.getElementById('name').value,
+              email: document.getElementById('email').value,
+              contact: document.getElementById('number').value
+            },
+            theme: { color: '#3498db' }
+          };
+          const rzp = new Razorpay(options);
+          rzp.open();
+        }).catch(error => {
+          console.error("Payment initiation error:", error);
+          alert('Error initiating payment. Please try again.');
+        });
+    }
+
+    function saveBooking(paymentId) {
+      const formData = {
+        vehicleType: document.getElementById('vehicleType').value,
+        vehicleModel: document.getElementById('vehicleModel').value,
+        paymentPlan: document.getElementById('paymentPlan').value,
+        name: document.getElementById('name').value,
+        phone_number: document.getElementById('number').value,
+        email: document.getElementById('email').value,
+        date: document.getElementById('date').value,
+        time: document.getElementById('time').value,
+        location: document.getElementById('location').value,
+        paymentId
+      };
+
+      fetch('/save-booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      })
+        .then(res => {
+          if (res.ok) {
+            alert('Your vehicle has been booked. Check your inbox or mail for more information.');
+          } else {
+            throw new Error('Failed to save booking');
+          }
+        })
+        .catch(error => {
+          console.error('Error saving booking:', error);
+          alert('Booking could not be saved. Please contact support.');
+        });
+    }
+
+  </script>
+</body>
+
+</html>
